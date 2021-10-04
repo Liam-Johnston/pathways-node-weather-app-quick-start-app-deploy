@@ -1,11 +1,11 @@
 FROM hashicorp/terraform:1.0.1 as tf
-MAINTAINER "Contino APAC <delivery.au@contino.io>"
 
 RUN apk add --update --no-cache \
         make \
         bash \
         python3 \
         py3-pip \
+        docker-cli \
         jq && \
     pip3 install --upgrade pip && \
     pip3 install \

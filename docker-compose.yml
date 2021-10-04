@@ -7,8 +7,12 @@ services:
       - type: bind
         source: .
         target: /opt/app
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
     working_dir: /opt/app
     env_file: .env
-
-
-    
+    environment:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_SESSION_TOKEN
