@@ -20,11 +20,11 @@ run_apply: tf_init tf_apply
 
 .PHONY: build
 build:
-	cd ./weather-app && docker build -t $(IMAGE_NAME) -f weather-app-dockerfile .
+	$(COMPOSE_RUN_BASH) ./scripts/build.sh
 
 .PHONY: push
 push:
-	$(COMPOSE_RUN_BASH) 'IMAGE_NAME=$(IMAGE_NAME) scripts/push.sh'
+	$(COMPOSE_RUN_BASH) ./scripts/push.sh
 
 
 .PHONY: tf_init
