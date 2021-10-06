@@ -36,6 +36,8 @@ terraform.rc
 # Ignore tfplan
 tfplan
 
+.terraform.lock.hcl
+
 # Logs
 logs
 *.log
