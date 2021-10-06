@@ -24,7 +24,7 @@ build:
 
 .PHONY: push
 push:
-	$(COMPOSE_RUN_BASH) IMAGE_NAME=$(IMAGE_NAME) scripts/push.sh
+	$(COMPOSE_RUN_BASH) 'IMAGE_NAME=$(IMAGE_NAME) scripts/push.sh'
 
 
 .PHONY: tf_init
