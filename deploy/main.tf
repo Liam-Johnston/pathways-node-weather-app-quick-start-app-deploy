@@ -37,3 +37,11 @@ module "service" {
   alb_sg_id        = aws_security_group.alb_sg.id
   project_ecr_arn  = data.aws_ecr_repository.project_repository.arn
 }
+
+module "self_healing_service" {
+  source = "./modules/self_healing_function"
+
+  username            = var.username
+  project_name        = var.project_name
+  github_access_token = var.github_access_token
+}

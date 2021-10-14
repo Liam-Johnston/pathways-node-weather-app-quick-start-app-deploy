@@ -14,6 +14,10 @@ resource "aws_ecs_task_definition" "service_task" {
   ]
   network_mode       = "awsvpc"
   execution_role_arn = aws_iam_role.ecs_execution_role.arn
+
+  lifecycle {
+    ignore_changes = [ tags ]
+  }
 }
 
 resource "aws_security_group" "service_sg" {
