@@ -33,7 +33,7 @@ jobs:
       - name: Build Functon
         run: make build_self_heal
       - name: Upload Artifact
-        uses: ctions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: function
           path: dist
