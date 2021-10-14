@@ -34,7 +34,9 @@ jobs:
         run: make build_self_heal
       - name: Upload Artifact
         uses: ctions/upload-artifact@v2
-        path: dist
+        with:
+          name: function
+          path: dist
 
   tf_plan:
     runs-on: ubuntu-latest

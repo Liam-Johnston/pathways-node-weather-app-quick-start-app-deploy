@@ -33,19 +33,24 @@ tf_init:
 
 .PHONY: tf_plan
 tf_plan:
+	mkdir -p dist
+	touch dist/function.zip
 	$(COMPOSE_RUN_TERRAFORM) plan -out=tfplan -input=false
 
 .PHONY: tf_apply
 tf_apply:
 	$(COMPOSE_RUN_TERRAFORM) apply "tfplan"
 
-
 .PHONY: tf_destroy_plan
 tf_destroy_plan:
+	mkdir -p dist
+	touch dist/function.zip
 	$(COMPOSE_RUN_TERRAFORM) plan -destroy
 
 .PHONY: tf_destroy_apply
 tf_destroy_apply:
+	mkdir -p dist
+	touch dist/function.zip
 	$(COMPOSE_RUN_TERRAFORM) destroy -auto-approve
 
 .PHONY: build_self_heal
