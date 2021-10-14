@@ -37,7 +37,7 @@ resource "aws_cloudwatch_metric_alarm" "unhealthy_host_alarm" {
   alarm_name = "${var.username}-${var.project_name}-unhealthy-host-alarm"
 
   comparison_operator = "LessThanThreshold"
-  threshold = 1
+  threshold = 0.9
   metric_name = "HealthyHostCount"
   namespace = "AWS/ApplicationELB"
   period = "60"
