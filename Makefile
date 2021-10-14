@@ -27,6 +27,8 @@ push:
 
 .PHONY: tf_init
 tf_init:
+	mkdir -p dist
+	touch dist/function.zip
 	$(COMPOSE_RUN_TERRAFORM) init -input=false
 	$(COMPOSE_RUN_TERRAFORM) validate
 	-$(COMPOSE_RUN_TERRAFORM) fmt
@@ -43,8 +45,6 @@ tf_apply:
 
 .PHONY: tf_destroy_plan
 tf_destroy_plan:
-	mkdir -p dist
-	touch dist/function.zip
 	$(COMPOSE_RUN_TERRAFORM) plan -destroy
 
 .PHONY: tf_destroy_apply
