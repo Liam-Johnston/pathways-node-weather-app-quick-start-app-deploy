@@ -44,4 +44,7 @@ module "self_healing_service" {
   username            = var.username
   project_name        = var.project_name
   github_access_token = var.github_access_token
+
+  load_balancer_arn_suffix = aws_lb.load_balancer.arn_suffix
+  target_group_arn_suffix  = aws_lb_target_group.ecs_target_group.arn_suffix
 }

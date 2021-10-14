@@ -13,3 +13,13 @@ variable "project_name" {
   type        = string
   description = "The name of the project that this service is apart of."
 }
+
+variable "target_group_arn_suffix" {
+  type = string
+  description = "The arn suffix of the target group that this service is deployed in"
+}
+
+variable "load_balancer_arn_suffix" {
+  type = string
+  description = "The arn suffix of the loadbalancer that this service is deployed behind"
+}

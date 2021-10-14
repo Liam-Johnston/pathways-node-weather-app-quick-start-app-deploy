@@ -23,6 +23,7 @@ services:
     environment:
       - GITHUB_USERNAME=liam-johnston
       - GITHUB_REPO=pathways-node-weather-app-quick-start-app-deploy
+      - GITHUB_TOKEN_SECRET_NAME=liamjohnston/node-weather-app/github-workflow-access-token
 
   self_healing_function_build:
     extends:

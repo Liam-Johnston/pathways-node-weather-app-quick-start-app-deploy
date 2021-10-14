@@ -15,7 +15,7 @@ const get_secret = async (key_id) => {
 
 
 const main = async () => {
-  const access_token = await get_secret("liamjohnston/node-weather-app/github-workflow-access-token")
+  const access_token = await get_secret(process.env.GITHUB_TOKEN_SECRET_NAME)
 
   const octokit = new Octokit({
     auth: access_token
@@ -27,6 +27,10 @@ const main = async () => {
     workflow_id: 'rebuild.yml',
     ref: 'master'
   })
+}
+
+exports.handler = async() => {
+  await main()
 }
 
 main()
