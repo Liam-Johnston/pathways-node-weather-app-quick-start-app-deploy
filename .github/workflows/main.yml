@@ -35,7 +35,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: function
+          name: self_healing_function
           path: dist
 
   tf_plan:
@@ -65,7 +65,13 @@ jobs:
       TF_VAR_github_access_token: ${{ secrets.WORKFLOW_ACCESS_TOKEN }}
     steps:
     - uses: actions/checkout@v2
-    - name: Terraform_Plan
-      run: make run_plan
-    - name: Run Terraform Apply
-      run: make run_apply
+    - name: Download Self Healing Function
+      uses: actions/download-artifact@v2
+      with:
+        name: self_healing_function
+    - name: Testing
+      run: ls; ls dist
+    # - name: Terraform_Plan
+    #   run: make run_plan
+    # - name: Run Terraform Apply
+    #   run: make run_apply
