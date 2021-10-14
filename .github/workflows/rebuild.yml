@@ -1,0 +1,11 @@
+name: Re-Build
+on:
+  workflow_dispatch
+
+job:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test
+        run: echo "Testing :)"
