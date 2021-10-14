@@ -12,9 +12,9 @@ jobs:
       TF_VAR_github_access_token: ${{ secrets.WORKFLOW_ACCESS_TOKEN }}
     steps:
     - uses: actions/checkout@v2
-    - name: Build Functon
-      run: make build_self_heal
     - name: Terraform_Plan
       run: make run_plan
+    - name: Build Functon
+      run: make build_self_heal
     - name: Run Terraform Apply
       run: make run_apply
