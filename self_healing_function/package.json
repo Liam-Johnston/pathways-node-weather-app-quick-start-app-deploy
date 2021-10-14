@@ -4,7 +4,7 @@
   "description": "self healing utility function for fargate service",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node -e 'require(\"src/index.js\").handler()'"
   },
   "author": "liam-johnston",
   "license": "ISC",

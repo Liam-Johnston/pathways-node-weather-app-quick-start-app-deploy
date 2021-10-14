@@ -32,5 +32,3 @@ const main = async () => {
 exports.handler = async() => {
   await main()
 }
-
-main()
