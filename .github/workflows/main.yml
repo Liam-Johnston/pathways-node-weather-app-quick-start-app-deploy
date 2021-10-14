@@ -38,7 +38,9 @@ jobs:
       run: make run_plan
 
   tf_apply:
-    needs: tf_plan
+    needs:
+      - tf_plan
+      - build_and_push
     environment:
       name: approval
     runs-on: ubuntu-latest
