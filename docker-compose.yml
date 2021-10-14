@@ -12,3 +12,21 @@ services:
         target: /var/run/docker.sock
     working_dir: /opt/app
     env_file: .env
+
+  self_healing_function:
+    build:
+      context: ./self_healing_function
+    init: true
+    volumes:
+      - './self_healing_function/src:/app/src'
+    env_file: .env
+    environment:
+      - GITHUB_USERNAME=liam-johnston
+      - GITHUB_REPO=pathways-node-weather-app-quick-start-app-deploy
+
+  self_healing_function_build:
+    extends:
+      service: self_healing_function
+    working_dir: /app/dist
+    volumes:
+      - './dist:/app/dist'

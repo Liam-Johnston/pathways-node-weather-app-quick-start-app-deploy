@@ -47,3 +47,16 @@ tf_destroy_plan:
 .PHONY: tf_destroy_apply
 tf_destroy_apply:
 	$(COMPOSE_RUN_TERRAFORM) destroy -auto-approve
+
+.PHONY: build_self_heal
+build_self_heal:
+	rm -rf "dist/"
+	mkdir -p dist
+	docker-compose run self_healing_function_build sh \
+		-c "cp -r /app/src/* /app/node_modules .; \
+		apk add zip; \
+		zip -rmq ./function.zip ."
+
+.PHONY: run_self_heal
+run_self_heal:
+	docker-compose run self_healing_function

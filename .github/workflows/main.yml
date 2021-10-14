@@ -25,6 +25,17 @@ jobs:
     - name: Build & Push
       run: make run_build_and_push
 
+  build_self_healing_function:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build Functon
+        run: make build_self_heal
+      - name: Upload Artifact
+        uses: ctions/upload-artifact@v2
+        path: dist
+
   tf_plan:
     runs-on: ubuntu-latest
     env:
@@ -41,6 +52,7 @@ jobs:
     needs:
       - tf_plan
       - build_and_push
+      - build_self_healing_function
     environment:
       name: approval
     runs-on: ubuntu-latest
