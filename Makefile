@@ -28,15 +28,13 @@ push:
 .PHONY: tf_init
 tf_init:
 	mkdir -p dist
-	touch dist/function.zip
+	[ ! -f ./dist/function.zip ] && touch ./dist/function.zip || exit 0
 	$(COMPOSE_RUN_TERRAFORM) init -input=false
 	$(COMPOSE_RUN_TERRAFORM) validate
 	-$(COMPOSE_RUN_TERRAFORM) fmt
 
 .PHONY: tf_plan
 tf_plan:
-	mkdir -p dist
-	touch dist/function.zip
 	$(COMPOSE_RUN_TERRAFORM) plan -out=tfplan -input=false
 
 .PHONY: tf_apply
@@ -49,8 +47,6 @@ tf_destroy_plan:
 
 .PHONY: tf_destroy_apply
 tf_destroy_apply:
-	mkdir -p dist
-	touch dist/function.zip
 	$(COMPOSE_RUN_TERRAFORM) destroy -auto-approve
 
 .PHONY: build_self_heal
