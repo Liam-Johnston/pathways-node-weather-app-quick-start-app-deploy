@@ -2,7 +2,7 @@ name: Re-Build
 on:
   workflow_dispatch
 
-job:
+jobs:
   rebuild:
     runs-on: ubuntu-latest
     steps:
