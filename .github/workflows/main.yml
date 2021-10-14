@@ -38,6 +38,7 @@ jobs:
       run: make run_plan
 
   tf_apply:
+    needs: tf_plan
     environment:
       name: approval
     runs-on: ubuntu-latest
@@ -48,5 +49,7 @@ jobs:
       WORKFLOW_ACCESS_TOKEN: ${{ secrets.WORKFLOW_ACCESS_TOKEN }}
     steps:
     - uses: actions/checkout@v2
+    - name: Terraform_Plan
+      run: make run_plan
     - name: Run Terraform Apply
       run: make run_apply
