@@ -9,7 +9,7 @@ resource "aws_sns_topic" "unhealthy_host_event_topic" {
 }
 
 resource "aws_cloudwatch_log_group" "log_group" {
-  name = "${var.username}-self_healing_utility_function"
+  name = "/aws/lambda/self_healing_utility_function"
 }
 
 resource "aws_lambda_function" "this" {
