@@ -1,5 +1,5 @@
 resource "aws_sns_topic" "unhealthy_host_event_topic" {
-  name = "${var.username}-${var.project_name}-unhealthy-host"
+  name = "${var.username}-${var.project_name}-rebuild-repo-request"
 
     lifecycle {
     ignore_changes = [
@@ -38,7 +38,7 @@ resource "aws_sns_topic_subscription" "sns_lambda_sub" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "unhealthy_host_alarm" {
-  alarm_name = "${var.username}-${var.project_name}-unhealthy-host-alarm"
+  alarm_name = "rebuild/pathways-node-weather-app-quick-start-app-deploy"
 
   comparison_operator = "LessThanThreshold"
   threshold = 0.9
