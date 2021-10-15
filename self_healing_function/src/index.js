@@ -1,20 +1,20 @@
-const secrets_manager = require('@aws-sdk/client-secrets-manager')
+const secretsManager = require('@aws-sdk/client-secrets-manager')
 const { Octokit } = require("@octokit/core")
 
 
 const __get_client = () => {
-  return new secrets_manager.SecretsManagerClient({region: process.env.AWS_DEFAULT_REGION})
+  return new secretsManager.SecretsManagerClient({region: process.env.AWS_DEFAULT_REGION})
 }
 
 
 const get_secret = async (key_id) => {
   let client = __get_client()
-  return await client.send(new secrets_manager.GetSecretValueCommand({SecretId: key_id}))
+  return await client.send(new secretsManager.GetSecretValueCommand({SecretId: key_id}))
     .then( data => data.SecretString)
 }
 
 
-const main = async () => {
+const main = async (repoName) => {
   const access_token = await get_secret(process.env.GITHUB_TOKEN_SECRET_NAME)
 
   const octokit = new Octokit({
@@ -23,15 +23,15 @@ const main = async () => {
 
   await octokit.request("POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches", {
     owner: process.env.GITHUB_USERNAME,
-    repo: process.env.GITHUB_REPO,
+    repo: repoName,
     workflow_id: 'rebuild.yml',
     ref: 'master'
   })
 }
 
 exports.handler = async(event, context) => {
-  console.log("EVENT: \n" + JSON.stringify(event, null, 2))
-  console.log("CONTEXT: \n" + JSON.stringify(context, null, 2))
+  const SNSMessage = event.Records[0].Sns.Message
+  const repoName = snsMessage.split("/").at(-1)
 
-  // await main()
+  await main(repoName)
 }

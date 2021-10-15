@@ -1,4 +1,4 @@
-resource "aws_sns_topic" "unhealthy_host_event_topic" {
+resource "aws_sns_topic" "rebuild_repo_event_topic" {
   name = "${var.username}-${var.project_name}-rebuild-repo-request"
 
     lifecycle {
@@ -25,20 +25,19 @@ resource "aws_lambda_function" "this" {
   environment {
     variables = {
       GITHUB_USERNAME = "liam-johnston"
-      GITHUB_REPO = "pathways-node-weather-app-quick-start-app-deploy"
       GITHUB_TOKEN_SECRET_NAME = aws_secretsmanager_secret.github_access_token.name
     }
   }
 }
 
 resource "aws_sns_topic_subscription" "sns_lambda_sub" {
-  topic_arn = aws_sns_topic.unhealthy_host_event_topic.arn
+  topic_arn = aws_sns_topic.rebuild_repo_event_topic.arn
   protocol = "lambda"
   endpoint = aws_lambda_function.this.arn
 }
 
 resource "aws_cloudwatch_metric_alarm" "unhealthy_host_alarm" {
-  alarm_name = "rebuild/pathways-node-weather-app-quick-start-app-deploy"
+  alarm_name = "rebuild/unhealthy_host/pathways-node-weather-app-quick-start-app-deploy"
 
   comparison_operator = "LessThanThreshold"
   threshold = 0.9
@@ -48,7 +47,7 @@ resource "aws_cloudwatch_metric_alarm" "unhealthy_host_alarm" {
   statistic = "Average"
   evaluation_periods = "1"
   actions_enabled = "true"
-  alarm_actions = [aws_sns_topic.unhealthy_host_event_topic.arn]
+  alarm_actions = [aws_sns_topic.rebuild_repo_event_topic.arn]
 
   dimensions = {
     TargetGroup = var.target_group_arn_suffix
