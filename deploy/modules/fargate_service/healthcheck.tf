@@ -17,7 +17,7 @@ resource "aws_cloudwatch_metric_alarm" "unhealthy_host_alarm" {
 
   dimensions = {
     TargetGroup = var.target_group_arn_suffix
-    LoadBalancer = var.load_balancer_arn_suffix
+    LoadBalancer = var.loadbalancer_arn_suffix
   }
 
   lifecycle {
