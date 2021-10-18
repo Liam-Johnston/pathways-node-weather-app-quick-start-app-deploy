@@ -40,7 +40,6 @@ jobs:
     needs:
       - tf_plan
       - build_and_push
-      - build_self_healing_function
     environment:
       name: approval
     runs-on: ubuntu-latest
