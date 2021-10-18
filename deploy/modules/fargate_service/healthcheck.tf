@@ -13,7 +13,7 @@ resource "aws_cloudwatch_metric_alarm" "unhealthy_host_alarm" {
   statistic = "Average"
   evaluation_periods = "1"
   actions_enabled = "true"
-  alarm_actions = [data.aws_sns_topic.rebuild_repo_event_topic.arn]
+  alarm_actions = [data.aws_sns_topic.rebuild_event_topic.arn]
 
   dimensions = {
     TargetGroup = var.target_group_arn_suffix
