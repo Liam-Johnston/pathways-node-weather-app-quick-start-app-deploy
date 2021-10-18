@@ -3,17 +3,26 @@ on:
   workflow_dispatch
 
 jobs:
-  rebuild:
+
+  build_and_push:
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-      TF_VAR_github_access_token: ${{ secrets.WORKFLOW_ACCESS_TOKEN }}
     steps:
     - uses: actions/checkout@v2
-    - name: Build Functon
-      run: make build_self_heal
+    - name: Build & Push
+      run: make run_build_and_push
+
+  rebuild-infra:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+    steps:
+    - uses: actions/checkout@v2
     - name: Terraform_Plan
       run: make run_plan
     - name: Run Terraform Apply
