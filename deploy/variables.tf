@@ -21,9 +21,3 @@ variable "project_name" {
   description = "The name of the project that this app is apart of."
   default     = "node-weather-app"
 }
-
-variable "github_access_token" {
-  description = "The access token to allow the service to invoke the redploy workflow"
-  type        = string
-  sensitive   = true
-}

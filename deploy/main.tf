@@ -36,15 +36,7 @@ module "service" {
   target_group_arn = aws_lb_target_group.ecs_target_group.arn
   alb_sg_id        = aws_security_group.alb_sg.id
   project_ecr_arn  = data.aws_ecr_repository.project_repository.arn
-}
 
-module "self_healing_service" {
-  source = "./modules/self_healing_function"
-
-  username            = var.username
-  project_name        = var.project_name
-  github_access_token = var.github_access_token
-
-  load_balancer_arn_suffix = aws_lb.load_balancer.arn_suffix
-  target_group_arn_suffix  = aws_lb_target_group.ecs_target_group.arn_suffix
+  loadbalancer_arn_suffix = aws_lb.load_balancer.arn_suffix
+  target_group_arn_suffix = aws_lb_target_group.ecs_target_group.arn_suffix
 }

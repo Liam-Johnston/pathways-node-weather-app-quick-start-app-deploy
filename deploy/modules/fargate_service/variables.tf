@@ -43,6 +43,16 @@ variable "target_group_arn" {
   description = "The ARN of the target group that this service is to be associated to"
 }
 
+variable "target_group_arn_suffix" {
+  type = string
+  description = "The ARN suffix of the target group that this service is to be associated to"
+}
+
+variable "loadbalancer_arn_suffix" {
+  type = string
+  description = "The ARN suffix of the target group that this service is to be associated to"
+}
+
 variable "desired_service_count" {
   type = number
   description = "The number of running services that you want."
